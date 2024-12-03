@@ -5,16 +5,18 @@ import { useStorage } from "../hooks/useStorage";
 import { db } from "../config/firebase";
 import { doc, setDoc, getDoc, serverTimestamp } from "firebase/firestore";
 import Logo from "../assets/Logo";
+import Divider from "../components/ui/Divider";
+
+
 const Setup = () => {
   const navigate = useNavigate();
   const { signup, user } = useAuth();
   const {
     uploadTeamLogo,
-    loading: uploadLoading,
     error: uploadError,
   } = useStorage();
   const [step, setStep] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   // Redirigir si ya hay un usuario autenticado
@@ -202,18 +204,17 @@ const Setup = () => {
             src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
             className="absolute inset-0 h-full w-full object-cover opacity-80"
           />
-
           <div className="hidden lg:relative lg:block lg:p-12">
             <div className="block text-white">
               <span className="sr-only">Inicio</span>
               <Logo />
             </div>
             <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl dark:text-white">
-              Bienvenido a tu nuevo equipo con CrewSpot 🦑
+              CrewSpot: Tu equipo visible, conectado y eficiente 🦑
             </h1>
 
             <p className="mt-4 leading-relaxed text-gray-500 dark:text-gray-400">
-              Una forma de ver a tu equipo de una manera diferente
+              Visualiza y coordina a tu equipo en tiempo real de manera simple e intuitiva
             </p>
           </div>
         </section>
@@ -226,15 +227,14 @@ const Setup = () => {
                 <Logo />
               </div>
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl dark:text-white">
-                Bienvenido a tu nuevo equipo con CrewSpot 🦑
+                CrewSpot: Tu equipo visible, conectado y eficiente 🦑
               </h1>
-
               <p className="mt-4 leading-relaxed text-gray-500 dark:text-gray-400">
-                Una forma de ver a tu equipo de una manera diferente
+                Visualiza y coordina a tu equipo en tiempo real de manera simple e intuitiva
               </p>
+              <Divider></Divider>
             </div>
 
-            {renderError()}
             <div className="col-span-6">
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl dark:text-white">
                 {step === 1 ? "Configura tu Equipo" : "Cuenta de Administrador"}
@@ -246,6 +246,9 @@ const Setup = () => {
                   : "Datos del administrador principal"}
               </p>
             </div>
+
+
+            {renderError()}
             {step === 1 ? (
               <form
                 onSubmit={handleTeamSubmit}
